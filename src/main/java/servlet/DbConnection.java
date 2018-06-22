@@ -20,8 +20,6 @@ public class DbConnection extends HttpServlet {
 		String targetUser = request.getParameter("targetUser");
 		String sourceTable = request.getParameter("sourceTable");
 		String targetTable = request.getParameter("targetTable");
-		String sourcePassword = request.getParameter("sourceTable");
-		String targetPassword = request.getParameter("targetPassword");
 		
 		String result = "Connection established with source and target datasources.";
 		
