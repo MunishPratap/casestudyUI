@@ -1,0 +1,243 @@
+<html>
+
+<head>
+<title>Valitador</title>
+<script src="https://code.jquery.com/jquery-1.10.2.js" type="text/javascript"></script>
+<script src="js/script.js"></script>
+<style>
+.container {
+	margin: auto;
+	width: 60%;
+	padding: 10px;
+}
+</style>
+<script>
+	
+</script>
+</head>
+
+<body>
+	<div class="container">
+		<table>
+			<tr>
+				<td>
+					<table>
+						<thead>
+							<tr>
+								<th colspan="2">Source</th>
+							</tr>
+
+						</thead>
+						<tbody>
+							<tr>
+								<td>DataSource Type:</td>
+								<td><select name="sourceType" id="sourceType">
+										<option value="RDBMS">RDBMS</option>
+										<option value="Hive">Hive</option>
+										<option value="HDFS">HDFS</option>
+								</select></td>
+							</tr>
+							<tr>
+								<td>Database Name:</td>
+								<td><input type="text" name="sourceDb" id="sourceDb"
+									required></td>
+							</tr>
+							<tr>
+								<td>User Name:</td>
+								<td><input type="text" name="sourceUser" id="sourceUser"
+									required></td>
+							</tr>
+							<tr>
+								<td>Database Password:</td>
+								<td><input type="password" name="sourcePassword"
+									id="sourcePassword" required></td>
+							</tr>
+							<tr>
+								<td>Table Name:</td>
+								<td><input type="text" name="sourceTable" id="sourceTable"
+									required></td>
+							</tr>
+						</tbody>
+					</table>
+				</td>
+				<td>
+					<table>
+						<thead>
+							<tr>
+								<th colspan="2">Destination</th>
+							</tr>
+
+						</thead>
+						<tbody>
+							<tr>
+								<td>DataSource Type:</td>
+								<td><select name="destinationType" id="destinationType">
+										<option value="RDBMS">RDBMS</option>
+										<option value="Hive">Hive</option>
+										<option value="HDFS">HDFS</option>
+								</select></td>
+							</tr>
+							<tr>
+								<td>Database Name:</td>
+								<td><input type="text" name="destinationDb"
+									id="destinationDb" required></td>
+							</tr>
+							<tr>
+								<td>User Name:</td>
+								<td><input type="text" name="destinationUser"
+									id="destinationUser" required></td>
+							</tr>
+							<tr>
+								<td>Database Password:</td>
+								<td><input type="password" name="destinationPassword"
+									id="destinationPassword" required></td>
+							</tr>
+							<tr>
+								<td>Table Name:</td>
+								<td><input type="text" name="destinationTable"
+									id="destinationTable" required></td>
+							</tr>
+						</tbody>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" style="text-align: center;">
+					<button type="button" name="connector" id="connector">Connect
+						to Data Sources</button>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<div id="connectionResult"></div>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<table style="width: 100%;">
+						<thead>
+							<tr>
+								<th colspan="2">MetaData Validation</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><input type="checkbox" name="matchColCount"
+									id="matchColCount"></td>
+								<td>Validate Column Count</td>
+							</tr>
+							<tr>
+								<td colspan="2">
+									<div id="colCountValidationResult"></div>
+								</td>
+							</tr>
+							<tr>
+								<td><input type="checkbox" name="matchColDataTypes"
+									id="matchColDataTypes"></td>
+								<td>Validate Column Data type</td>
+							</tr>
+							<tr>
+								<td colspan="2">
+									<div id="colDataTypesValidationResult"></div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<table style="width: 100%;">
+						<thead>
+							<th colspan="2">Data Validation</th>
+						</thead>
+						<tbody>
+							<tr>
+								<td><input type="checkbox" name="rowByRowValidation"
+									id="rowByRowValidation"></td>
+								<td>Row by Row Validation (MD5)</td>
+							</tr>
+							<tr>
+								<td colspan="2">
+									<div id="rowByRowValidationResult"></div>
+								</td>
+							</tr>
+							<tr>
+								<td><input type="checkbox" name="sampleValidation"
+									id="sampleValidation"></td>
+								<td>Validation of Samples</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td>No. of Samples: <input type="text" name="sampleLimit"
+									id="sampleLimit">
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2">
+									<div id="sampleValidationResult"></div>
+								</td>
+							</tr>
+							<tr>
+								<td><input type="checkbox" name="customQueryValidation"
+									id="customQueryValidation"></td>
+								<td>Validate Custom Query</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td><textarea rows="3" cols="30" name="sourceCustomQuery"
+										id="sourceCustomQuery"></textarea> <textarea rows="3"
+										cols="30" name="destinationCustomQuery"
+										id="destinationCustomQuery"></textarea></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td><input type="checkbox" name="outputValidation"
+									id="outputValidation"> Validate Output</td>
+							</tr>
+							<tr>
+								<td colspan="2">
+									<div id="customQueryOutputValidationResult"></div>
+								</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td><input type="checkbox" name="assertValueValidation"
+									id="assertValueValidation"> Validate by Assert Value</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td>Assert Value: <input type="text" name="assertValue"
+									id="assertValue">
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2">
+									<div id="customQueryAssertValueValidationResult"></div>
+								</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td><input type="checkbox" name="resultCountValidation"
+									id="resultCountValidation"> Validate Result Count</td>
+							</tr>
+							<tr>
+								<td colspan="2">
+									<div id="customQueryResultCountValidationResult"></div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" style="text-align: center;">
+					<button type="button" name="reportgenerator" id="reportgenerator">Generate
+						Report</button>
+				</td>
+			</tr>
+		</table>
+	</div>
+</body>
+
+</html>
